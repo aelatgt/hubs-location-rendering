@@ -39,10 +39,20 @@
         <!-- Using the asset management system. -->
         <a-curvedimage src="#curvy-image" class="entity" height="3.0" radius="5.7" theta-length="72" position="-15 1 4" rotation="0 -80 0" scale="0.8 0.8 0.8" visible="true"></a-curvedimage>
 
-        <!-- A-Frame Hello World scene -->
+        <!-- A-Frame primitive entities -->
         <a-circle position="0 0.5 0" rotation="-90 0 0" scale=".5 .5 .5" color="black"></a-circle>
         
-        <a-box id="box" class="entity" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow></a-box>
+        <a-box id="box" class="entity" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow>
+            <a-animation
+                attribute="rotation"
+                from="20 0 0"
+                to="20 360 0"
+                direction="alternate"
+                dur="4000"
+                repeat="indefinite"
+                easing="ease">
+            </a-animation>
+        </a-box>
 
         <a-video id="video1" src="#desert-vid" class="entity" position="11 4 -20" rotation="0 0 0" width="10" height="6" play-on-click visible="true"></a-video>
 
@@ -52,7 +62,16 @@
         
         <a-cylinder id="cylinder" class="entity" visible="true" mixin="collider" position="-6 0.9 15" radius="0.5" height="1.5" color="#0E6B0E" shadow></a-cylinder>
 
-        <a-torus id="torus" class="entity" visible="true" mixin="collider" position="10 3 10" rotation="0 45 0" radius="1.5" scale="3 3 3" height="3.5" width="3.5" color="#663399" shadow></a-torus>
+        <a-torus id="torus" class="entity" visible="true" mixin="collider" position="10 3 10" rotation="0 45 0" radius="1.5" scale="3 3 3" height="3.5" width="3.5" color="#663399" shadow>
+            <a-animation
+                attribute="scale"
+                to="1 0.5 1"
+                direction="alternate"
+                dur="2000"
+                repeat="indefinite"
+                easing="linear">
+            </a-animation>
+        </a-torus>
 
         <a-plane id="floor" color="#F2CF9D" height="20" width="20" rotation="-90 0 0" position="0 0.2 0" scale="2.5 2.5 2.5"></a-plane>
  
