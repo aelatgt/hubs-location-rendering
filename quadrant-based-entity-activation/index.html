@@ -34,15 +34,15 @@
             <img id="flatty-image" preload="auto" autoplay src="https://cdn.glitch.com/aa4e0f83-1469-4962-844f-cbd21cecf4c3%2FCovid_Museum_Bubbles_Room.PNG?v=1613271322313">
         </a-assets>
 
-        <a-image src="#flatty-image" class="entity" height="4" width="4" position="-5 2 -10"></a-image>
+        <a-image src="#flatty-image" class="interactable" height="4" width="4" position="-5 2 -10"></a-image>
         
         <!-- Using the asset management system. -->
-        <a-curvedimage src="#curvy-image" class="entity" height="3.0" radius="5.7" theta-length="72" position="-15 1 4" rotation="0 -80 0" scale="0.8 0.8 0.8" visible="true"></a-curvedimage>
+        <a-curvedimage src="#curvy-image" class="interactable" height="3.0" radius="5.7" theta-length="72" position="-15 1 4" rotation="0 -80 0" scale="0.8 0.8 0.8" visible="true"></a-curvedimage>
 
         <!-- A-Frame primitive entities -->
         <a-circle position="0 0.5 0" rotation="-90 0 0" scale=".5 .5 .5" color="black"></a-circle>
         
-        <a-box id="box" class="entity" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow>
+        <a-box id="box" class="interactable" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow>
             <a-animation
                 attribute="rotation"
                 from="20 0 0"
@@ -54,15 +54,15 @@
             </a-animation>
         </a-box>
 
-        <a-video id="video1" src="#desert-vid" class="entity" position="11 4 -20" rotation="0 0 0" width="10" height="6" play-on-click visible="true"></a-video>
+        <a-video id="video1" src="#desert-vid" class="interactable" position="11 4 -20" rotation="0 0 0" width="10" height="6" play-on-click visible="true"></a-video>
 
-        <a-sphere id="sphere" class="entity" visible="true" mixin="collider" position="-18 4 -6" radius="1.25" scale="3 3 3" shadow color="#EF2D5E"></a-sphere>
+        <a-sphere id="sphere" class="interactable" visible="true" mixin="collider" position="-18 4 -6" radius="1.25" scale="3 3 3" shadow color="#EF2D5E"></a-sphere>
 
-        <a-cone id="cone" class="entity" visible="true" mixin="collider" position="-9 12 -20" radius-bottom="2" radius-top="0.5"shadow color="orange"></a-cone>
+        <a-cone id="cone" class="interactable" visible="true" mixin="collider" position="-9 12 -20" radius-bottom="2" radius-top="0.5"shadow color="orange"></a-cone>
         
-        <a-cylinder id="cylinder" class="entity" visible="true" mixin="collider" position="-6 0.9 15" radius="0.5" height="1.5" color="#0E6B0E" shadow></a-cylinder>
+        <a-cylinder id="cylinder" class="interactable" visible="true" mixin="collider" position="-6 0.9 15" radius="0.5" height="1.5" color="#0E6B0E" shadow></a-cylinder>
 
-        <a-torus id="torus" class="entity" visible="true" mixin="collider" position="10 3 10" rotation="0 45 0" radius="1.5" scale="3 3 3" height="3.5" width="3.5" color="#663399" shadow>
+        <a-torus id="torus" class="interactable" visible="true" mixin="collider" position="10 3 10" rotation="0 45 0" radius="1.5" scale="3 3 3" height="3.5" width="3.5" color="#663399" shadow>
             <a-animation
                 attribute="scale"
                 to="1 0.5 1"
@@ -99,6 +99,6 @@
             
         </a-entity>
     </a-scene>
-    <script src="js/script.js"></script>
+    <script src="js/activebyquad.js"></script>
 </body>
 </html>
