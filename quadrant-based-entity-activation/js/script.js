@@ -16,7 +16,7 @@ assignQuadsToEntities();
 //document.addEventListener('DOMContentLoaded', () => 
   function assignQuadsToEntities(){
       //Query all entity assets
-      let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked]");
+      let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked] .interactable");
       //const allEntityArray = document.querySelectorAll(".entity");
       allEntityArray.forEach(element => element.setAttribute("visible", false));
 
