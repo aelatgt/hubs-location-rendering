@@ -13,38 +13,35 @@ let prevQuad = null;
 
 assignQuadsToEntities();
 
-//document.addEventListener('DOMContentLoaded', () => 
-  function assignQuadsToEntities(){
-      //Query all entity assets
-      let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked]");
-      //const allEntityArray = document.querySelectorAll(".entity");
-      allEntityArray.forEach(element => element.setAttribute("visible", false));
+function assignQuadsToEntities(){
+  //Query all entity assets
+  let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video]");
+  allEntityArray.forEach(element => element.setAttribute("visible", false));
 
-      //Calculate and assign corresponding "quad" class to each entity 
-      for(let i = 0; i < allEntityArray.length; i++){
-        let currEntity = allEntityArray[i];
-        let entityPos = currEntity.getAttribute('position');
-        let entityAngle = calcAngle(ORIGIN_X, ORIGIN_Z, entityPos.x, entityPos.z);  
-        let entityQuad = calcQuad(entityAngle);
+  //Calculate and assign corresponding "quad" class to each entity 
+  for(let i = 0; i < allEntityArray.length; i++){
+    let currEntity = allEntityArray[i];
+    let entityPos = currEntity.getAttribute('position');
+    let entityAngle = calcAngle(ORIGIN_X, ORIGIN_Z, entityPos.x, entityPos.z);  
+    let entityQuad = calcQuad(entityAngle);
 
-        if( entityQuad === 1 ){
-          currEntity.classList.add("quad1");
-        }
-        else if( entityQuad === 2){
-          currEntity.classList.add("quad2");
-        }
-        else if( entityQuad === 3){
-          currEntity.classList.add("quad3");
-        }
-        else if( entityQuad === 4){
-          currEntity.classList.add("quad4");
-        }
-        else{
-          alert("Could not determine quadrant");
-        }
-      }
+    if( entityQuad === 1 ){
+      currEntity.classList.add("quad1");
+    }
+    else if( entityQuad === 2){
+      currEntity.classList.add("quad2");
+    }
+    else if( entityQuad === 3){
+      currEntity.classList.add("quad3");
+    }
+    else if( entityQuad === 4){
+      currEntity.classList.add("quad4");
+    }
+    else{
+      console.log("Could not determine quadrant");
+    }
   }
-//, false);
+}
 
 //Continously update scene info
 setInterval(function() {
