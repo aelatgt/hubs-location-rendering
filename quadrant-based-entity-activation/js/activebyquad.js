@@ -1,9 +1,14 @@
 //Query user and text elements
 const cameraEl = document.querySelector("[networked-avatar]"); //query the user
-//const cameraEl = document.querySelector("[camera]");
 const posTextEl = document.querySelector("#pos-text");
 const angleTextEl = document.querySelector("#angle-text");
 const quadTextEl = document.querySelector("#quad-text");
+const sceneEl = document.querySelector('a-scene');
+let interactablesAmountBefore = document.querySelector(".interactable").length;
+
+//Query all entity assets
+let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
+allEntityArray.forEach(element => element.setAttribute("visible", false));
 
 const ORIGIN_X = 0;
 const ORIGIN_Z = 0;
@@ -11,16 +16,13 @@ const ORIGIN_Z = 0;
 let currQuad = null;
 let prevQuad = null;
 
-assignQuadsToEntities();
+assignQuadsToEntities(allEntityArray);
 
-function assignQuadsToEntities(){
-  //Query all entity assets
-  let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked]");
-  allEntityArray.forEach(element => element.setAttribute("visible", false));
+function assignQuadsToEntities(entityArr){
 
   //Calculate and assign corresponding "quad" class to each entity 
-  for(let i = 0; i < allEntityArray.length; i++){
-    let currEntity = allEntityArray[i];
+  for(let i = 0; i < entityArr.length; i++){
+    let currEntity = entityArr[i];
     let entityPos = currEntity.getAttribute('position');
     let entityAngle = calcAngle(ORIGIN_X, ORIGIN_Z, entityPos.x, entityPos.z);  
     let entityQuad = calcQuad(entityAngle);
@@ -45,6 +47,11 @@ function assignQuadsToEntities(){
 
 //Continously update scene info
 setInterval(function() {
+  // let interactClassAfter = document.querySelector(".interactable").length;
+  // if (interactablesAmountAfter != interactablesAmountBefore){
+  //   interactablesAmountBefore = interactClassAfter;
+  // }
+
   let localPos = cameraEl.object3D.position;
   let worldPos = cameraEl.object3D.getWorldPosition();
   
