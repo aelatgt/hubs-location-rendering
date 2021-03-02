@@ -1,9 +1,9 @@
 //Query user and text elements
 const cameraEl = document.querySelector("[networked-avatar]"); //query the user
 //const cameraEl = document.querySelector("[camera]");
-//const posTextEl = document.querySelector("#pos-text");
-//const angleTextEl = document.querySelector("#angle-text");
-//const quadTextEl = document.querySelector("#quad-text");
+const posTextEl = document.querySelector("#pos-text");
+const angleTextEl = document.querySelector("#angle-text");
+const quadTextEl = document.querySelector("#quad-text");
 
 const ORIGIN_X = 0;
 const ORIGIN_Z = 0;
@@ -15,7 +15,7 @@ assignQuadsToEntities();
 
 function assignQuadsToEntities(){
   //Query all entity assets
-  let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video]");
+  let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked]");
   allEntityArray.forEach(element => element.setAttribute("visible", false));
 
   //Calculate and assign corresponding "quad" class to each entity 
@@ -50,19 +50,19 @@ setInterval(function() {
   
   let playerX = worldPos.x;
   let playerZ = worldPos.z
-  
+ 
   //Calculate user current angle and quadrant
   let currAngle = calcAngle(ORIGIN_X, ORIGIN_Z, playerX, playerZ).toFixed(2);
   currQuad = calcQuad(currAngle);
   
-  // //Update user position text
-  // posTextEl.setAttribute("value", "Position: " + worldPos.x.toFixed(2) + " " + worldPos.y.toFixed(2) + " " + worldPos.z.toFixed(2) + " ");
+  //Update user position text
+  posTextEl.setAttribute("value", "Position: " + worldPos.x.toFixed(2) + " " + worldPos.y.toFixed(2) + " " + worldPos.z.toFixed(2) + " ");
  
-  // //Update user angle text
-  // angleTextEl.setAttribute("value", "\n\nAngle: " + currAngle);
+  //Update user angle text
+  angleTextEl.setAttribute("value", "\n\nAngle: " + currAngle);
   
-  // //Update user quadrant text
-  // quadTextEl.setAttribute("value", "\n\n\n\nQuadrant: " + currQuad);
+  //Update user quadrant text
+  quadTextEl.setAttribute("value", "\n\n\n\nQuadrant: " + currQuad);
   
   //Check if user left the quadrant
   if(prevQuad != currQuad){
