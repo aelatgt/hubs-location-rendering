@@ -5,9 +5,9 @@ const cameraEl = document.querySelector("[networked-avatar]"); //query the user
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
 
 // //Text entities
-// const posTextEl = document.querySelector("#pos-text");
-// const angleTextEl = document.querySelector("#angle-text");
-// const quadTextEl = document.querySelector("#quad-text");
+//const posTextEl = document.querySelector("#pos-text");
+//const angleTextEl = document.querySelector("#angle-text");
+//const quadTextEl = document.querySelector("#quad-text");
 
 //Query all entity assets
 let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
