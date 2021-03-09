@@ -7,8 +7,8 @@
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-teleport-controls/dist/aframe-teleport-controls.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>   
-    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>\
-    <script src="js/play-on-click.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="js/remote-media-player.js"></script>
     <title>Spawn Objs in Quads Procedual</title>
 </head>
 <body>
@@ -42,7 +42,7 @@
         <!-- A-Frame primitive entities -->
         <a-circle id="center-of-room" position="0 0.5 0" rotation="-90 0 0" scale=".5 .5 .5" color="black"></a-circle>
         
-        <a-box id="box" gltf-model-plus networked class="interactable" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow>
+        <a-box id="box" gltf-model-plus networked class="interactable" remote-media-player="media: #desert-vid" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow>
             <a-animation
                 attribute="rotation"
                 from="20 0 0"
@@ -54,7 +54,8 @@
             </a-animation>
         </a-box>
 
-        <a-video id="video1" media-video networked src="#desert-vid" class="interactable" position="11 4 -20" rotation="0 0 0" width="10" height="6" play-on-click visible="true"></a-video>
+        <a-video id="video1" media-video networked src="desert-vid" class="interactable" position="11 4 -20" rotation="0 0 0" width="10" height="6" visible="true"></a-video>
+        <a-curvedimage id="video2" src="#desert-vid" class="interactable" position="11 4 -10" rotation="0 180 0" height="4.0" radius="5.7" theta-length="72"></a-curvedimage>
 
         <a-sphere id="sphere" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-18 4 -6" radius="1.25" scale="3 3 3" shadow color="#EF2D5E"></a-sphere>
 
