@@ -22,8 +22,8 @@
             <a-mixin id="hand" raycaster="objects: .clickable" teleport-controls="cameraRig: #camera-rig; teleportOrigin: #head; button: grip"></a-mixin>
         </a-assets>
 
-        <a-assets>
-            <video id="desert-vid"  preload="auto" loop="false" src="https://cdn.glitch.com/aa4e0f83-1469-4962-844f-cbd21cecf4c3%2Fdesert.mp4?v=1613267558490" crossOrigin="anonymous"></video>
+        <a-assets>          
+            <video id="big-buck-vid"  preload="auto" loop="false" src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv" crossOrigin="anonymous"></video>
         </a-assets>
 
         <a-assets>
@@ -31,19 +31,19 @@
         </a-assets>
 
         <a-assets>
-            <img id="flatty-image" preload="auto" autoplay src="https://cdn.glitch.com/aa4e0f83-1469-4962-844f-cbd21cecf4c3%2FCovid_Museum_Bubbles_Room.PNG?v=1613271322313">
+            <img id="flat-image" preload="auto" autoplay src="https://cdn.glitch.com/aa4e0f83-1469-4962-844f-cbd21cecf4c3%2FCovid_Museum_Bubbles_Room.PNG?v=1613271322313">
         </a-assets>
 
-        <a-image src="#flatty-image" media-image networked class="interactable" height="4" width="4" position="-5 2 -10"></a-image>
-        
-        <!-- Using the asset management system. -->
-        <a-curvedimage src="#curvy-image"  media-image networked class="interactable" height="3.0" radius="5.7" theta-length="72" position="-15 1 4" rotation="0 -80 0" scale="0.8 0.8 0.8" visible="true"></a-curvedimage>
+        <!-- Media Entities -->
+        <a-image src="#flat-image" media-image networked class="interactable" height="4" width="4" position="-5 2 -10"></a-image>
+        <a-curvedimage id="video1" media-video networked src="#big-buck-vid" class="interactable" position="11 4 -5" rotation="0 90 0" height="4.0" radius="5.7" theta-length="72"></a-curvedimage>
+        <a-curvedimage src="#curvy-image"  media-image networked class="interactable" height="3.0" radius="5.7" theta-length="72" position="-15 1 4" rotation="0 -80 0" scale="2 2 2" visible="true"></a-curvedimage>
 
-        <!-- A-Frame primitive entities -->
+        <!-- Primitive Entities -->
         <a-circle id="center-of-room" position="0 0.5 0" rotation="-90 0 0" scale=".5 .5 .5" color="black"></a-circle>
         
-        <a-box id="box" gltf-model-plus networked class="interactable" remote-media-player="media: #desert-vid" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow>
-            <a-animation
+        <a-box id="box" gltf-model-plus networked class="interactable" remote-media-player="media: #big-buck-vid" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow></a-box>
+            <!-- <a-animation
                 attribute="rotation"
                 from="20 0 0"
                 to="20 360 0"
@@ -51,28 +51,33 @@
                 dur="4000"
                 repeat="indefinite"
                 easing="ease">
-            </a-animation>
-        </a-box>
-
-        <a-video id="video1" media-video networked src="desert-vid" class="interactable" position="11 4 -20" rotation="0 0 0" width="10" height="6" visible="true"></a-video>
-        <a-curvedimage id="video2" src="#desert-vid" class="interactable" position="11 4 -10" rotation="0 180 0" height="4.0" radius="5.7" theta-length="72"></a-curvedimage>
-
-        <a-sphere id="sphere" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-18 4 -6" radius="1.25" scale="3 3 3" shadow color="#EF2D5E"></a-sphere>
-
-        <a-cone id="cone" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-9 12 -20" radius-bottom="2" radius-top="0.5"shadow color="orange"></a-cone>
+            </a-animation> -->
         
+        <!-- <a-animation
+        attribute="rotation"
+        from="20 0 0"
+        to="20 360 0"
+        direction="alternate"
+        dur="4000"
+        repeat="indefinite"
+        easing="ease">
+        </a-animation> -->
+        
+        <a-sphere id="sphere" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-18 4 -6" radius="1.25" scale="3 3 3" shadow color="#EF2D5E"></a-sphere>
+        <a-cone id="cone" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-9 12 -20" radius-bottom="2" radius-top="0.5"shadow color="orange"></a-cone>     
         <a-cylinder id="cylinder" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-6 0.9 15" radius="0.5" height="1.5" color="#0E6B0E" shadow></a-cylinder>
+        <a-box id="box2" gltf-model-plus networked class="interactable" remote-media-player="media: #flying-torus" visible="true" mixin="collider" position="8 .7 5" rotation="0 45 0" width="1" height="1" depth="1" color="orange" shadow></a-box>
 
-        <a-torus id="torus" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="10 3 10" rotation="0 45 0" radius="1.5" scale="3 3 3" height="3.5" width="3.5" color="#663399" shadow>
-            <a-animation
-                attribute="scale"
-                to="1 0.5 1"
-                direction="alternate"
-                dur="2000"
-                repeat="indefinite"
-                easing="linear">
-            </a-animation>
-        </a-torus>
+        <a-torus id="flying-torus" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="10 4 10" rotation="0 45 0" radius="1.5" scale="2 2 2" height="3.5" width="3.5" color="#663399" shadow animation__position="property: object3D.position.y; from: 4; to: 8; dir: alternate; dur: 2000; loop: true"></a-torus>
+        <!-- <a-animation
+        attribute=""
+        to="1 0.5 1"
+        direction="alternate"
+        dur="2000"
+        repeat="indefinite"
+        easing="linear">
+        </a-animation> -->
+
 
         <a-plane id="floor" color="#F2CF9D" height="20" width="20" rotation="-90 0 0" position="0 0.2 0" scale="2.5 2.5 2.5"></a-plane>
  
