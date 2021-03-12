@@ -5,9 +5,9 @@ const cameraEl = document.querySelector("[networked-avatar]"); //query the user
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
 
 // //Text entities
-//const posTextEl = document.querySelector("#pos-text");
-//const angleTextEl = document.querySelector("#angle-text");
-//const quadTextEl = document.querySelector("#quad-text");
+const posTextEl = document.querySelector("#pos-text");
+const angleTextEl = document.querySelector("#angle-text");
+const quadTextEl = document.querySelector("#quad-text");
 
 //Query all entity assets
 let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
@@ -33,8 +33,6 @@ setInterval(function() {
     allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
     assignQuadsToEntities(allEntityArray);
   }
-    
-  //updateHUDText();
   
   //Check if user left the quadrant
   if(userPrevQuad != userCurrQuad){
@@ -92,9 +90,11 @@ function determineUserQuad(){
   //Calculate user current angle and quadrant
   let currAngle = calcAngle(ORIGIN_X, ORIGIN_Z, playerPos.x, playerPos.z).toFixed(2);
   userCurrQuad = calcQuad(currAngle);
+
+  updateHUDText(playerPos, currAngle, userCurrQuad);
 }
 
-function updateHUDText(){
+function updateHUDText(playerPos, currAngle, userCurrQuad){
   //Update user position text
   posTextEl.setAttribute("value", "Position: " + playerPos.x.toFixed(2) + " " + playerPos.y.toFixed(2) + " " + playerPos.z.toFixed(2) + " "); 
   //Update user angle text
