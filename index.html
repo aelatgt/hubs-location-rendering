@@ -8,8 +8,9 @@
     <script src="https://unpkg.com/aframe-teleport-controls/dist/aframe-teleport-controls.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component/dist/aframe-event-set-component.min.js"></script>   
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
     <script src="js/remote-media-player.js"></script>
-    <title>Spawn Objs in Quads Procedual</title>
+    <title>Hubs Quadrant-Based Rendering</title>
 </head>
 <body>
     <a-scene cursor="rayOrigin: mouse" background="color: black">
@@ -35,68 +36,32 @@
         </a-assets>
 
         <!-- Media Entities -->
-        <a-image src="#flat-image" media-image networked class="interactable" height="4" width="4" position="-5 2 -10"></a-image>
         <a-curvedimage id="video1" media-video networked src="#big-buck-vid" class="interactable" position="11 4 -5" rotation="0 90 0" height="4.0" radius="5.7" theta-length="72"></a-curvedimage>
-        <a-curvedimage src="#curvy-image"  media-image networked class="interactable" height="3.0" radius="5.7" theta-length="72" position="-15 1 4" rotation="0 -80 0" scale="2 2 2" visible="true"></a-curvedimage>
+        <a-curvedimage src="#curvy-image"  media-image networked class="interactable" height="5.0" radius="5.7" theta-length="72" position="-12 1 4" rotation="0 -80 0" scale="2 2 2" visible="true"></a-curvedimage>
 
         <!-- Primitive Entities -->
         <a-circle id="center-of-room" position="0 0.5 0" rotation="-90 0 0" scale=".5 .5 .5" color="black"></a-circle>
         
-        <a-box id="box" gltf-model-plus networked class="interactable" remote-media-player="media: #big-buck-vid" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow></a-box>
-            <!-- <a-animation
-                attribute="rotation"
-                from="20 0 0"
-                to="20 360 0"
-                direction="alternate"
-                dur="4000"
-                repeat="indefinite"
-                easing="ease">
-            </a-animation> -->
-        
-        <!-- <a-animation
-        attribute="rotation"
-        from="20 0 0"
-        to="20 360 0"
-        direction="alternate"
-        dur="4000"
-        repeat="indefinite"
-        easing="ease">
-        </a-animation> -->
-        
+        <a-box id="box" gltf-model-plus networked class="interactable" remote-media-player="media: #big-buck-vid" visible="true" mixin="collider" position="5 .7 -6" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow></a-box>   
         <a-sphere id="sphere" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-18 4 -6" radius="1.25" scale="3 3 3" shadow color="#EF2D5E"></a-sphere>
         <a-cone id="cone" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-9 12 -20" radius-bottom="2" radius-top="0.5"shadow color="orange"></a-cone>     
-        <a-cylinder id="cylinder" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-6 0.9 15" radius="0.5" height="1.5" color="#0E6B0E" shadow></a-cylinder>
+        <a-cylinder id="cylinder" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="-6 0.9 11" radius="0.5" height="1.5" color="#0E6B0E" shadow></a-cylinder>
         <a-box id="box2" gltf-model-plus networked class="interactable" remote-media-player="media: #flying-torus" visible="true" mixin="collider" position="8 .7 5" rotation="0 45 0" width="1" height="1" depth="1" color="orange" shadow></a-box>
-
         <a-torus id="flying-torus" class="interactable" gltf-model-plus networked visible="true" mixin="collider" position="10 4 10" rotation="0 45 0" radius="1.5" scale="2 2 2" height="3.5" width="3.5" color="#663399" shadow animation__position="property: object3D.position.y; from: 4; to: 8; dir: alternate; dur: 2000; loop: true"></a-torus>
-        <!-- <a-animation
-        attribute=""
-        to="1 0.5 1"
-        direction="alternate"
-        dur="2000"
-        repeat="indefinite"
-        easing="linear">
-        </a-animation> -->
 
-
-        <a-plane id="floor" color="#F2CF9D" height="20" width="20" rotation="-90 0 0" position="0 0.2 0" scale="2.5 2.5 2.5"></a-plane>
- 
-        <!--<a-entity environment="shadow: true"></a-entity>-->
-
-        <!--<a-sky color="skyblue"></a-sky>-->
+        <!--Environment-->
         <a-sky src="https://cdn.glitch.com/7e18fbf8-9686-4cf7-91f9-4a6bbdb54f5e%2Fsky.jpg?1544174075054"></a-sky>
+        <a-plane id="floor" color="#F2CF9D" height="20" width="20" rotation="-90 0 0" position="0 0.2 0" scale="2.5 2.5 2.5"></a-plane>
 
-        <!--<a-entity light="type: ambient; color: #CCC"></a-entity>-->
-
-        <!-- camera & hand controls -->
+        <!-- Camera & Hand Controls -->
 
         <a-entity id="camera-rig">
             
             <a-entity id="head" camera networked-avatar position="0 1.6 0" wasd-controls="fly: true" look-controls>
             <a-entity id="hud" position="0 0.16 -0.5" scale="0.3 0.3 0.3" opacity="0.8" align="center">
-                <a-text id="pos-text" value="Position: 0 1.6 0" opacity="0.5" align="center"></a-text>
-                <a-text id="angle-text" value="\n\nAngle: 0" opacity="0.5" align="center"></a-text>
-                <a-text id="quad-text" value="\n\n\n\nQuadrant: null" opacity="0.5" align="center"></a-text>
+                <a-text id="pos-text" value="" opacity="0.5" align="center"></a-text>
+                <a-text id="angle-text" value="" opacity="0.5" align="center"></a-text>
+                <a-text id="quad-text" value="" opacity="0.5" align="center"></a-text>
             </a-entity>
             </a-entity>
             
