@@ -91,7 +91,9 @@ function determineUserQuad(){
   let currAngle = calcAngle(ORIGIN_X, ORIGIN_Z, playerPos.x, playerPos.z).toFixed(2);
   userCurrQuad = calcQuad(currAngle);
 
-  updateHUDText(playerPos, currAngle, userCurrQuad);
+  if(posTextEl && angleTextEl && quadTextEl){
+    updateHUDText(playerPos, currAngle, userCurrQuad);
+  }
 }
 
 function updateHUDText(playerPos, currAngle, userCurrQuad){
