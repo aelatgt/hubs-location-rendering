@@ -192,10 +192,13 @@ function updateVisible(quadCurr, quadPrev){
 function updateActiveMusic(strataCurr, strataPrev){
   console.log("strataCurr: " + strataCurr);
   console.log("strataPrev: " + strataPrev);
-  strataMusicEntities[strataPrev].components.sound.stopSound();
-  strataMusicEntities[strataCurr].components.sound.playSound();
-  //strataPrev.components.sound.stopSound();
-  //strataCurr.components.sound.playSound();
+  
+  if(strataCurr){
+    strataMusicEntities[strataPrev].components.sound.stopSound();
+  }
+  if(strataPrev){
+    strataMusicEntities[strataCurr].components.sound.playSound();
+  }
 }
 
 
