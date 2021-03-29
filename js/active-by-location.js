@@ -193,10 +193,10 @@ function updateActiveMusic(strataCurr, strataPrev){
   console.log("strataCurr: " + strataCurr);
   console.log("strataPrev: " + strataPrev);
   
-  if(strataCurr != null){
+  if(strataPrev != null){
     strataMusicEntities[strataPrev].components.sound.stopSound();
   }
-  if(strataPrev != null){
+  if(strataCurr != null){
     strataMusicEntities[strataCurr].components.sound.playSound();
   }
 }
