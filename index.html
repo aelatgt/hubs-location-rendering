@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
     <script src="js/remote-media-player.js"></script>
-    <title>Hubs Quadrant-Based Rendering</title>
+    <title>Hubs Strata-Based Rendering</title>
 </head>
 <body>
     <a-scene cursor="rayOrigin: mouse" background="color: black">
@@ -35,9 +35,31 @@
             <img id="flat-image" preload="auto" autoplay src="https://cdn.glitch.com/aa4e0f83-1469-4962-844f-cbd21cecf4c3%2FCovid_Museum_Bubbles_Room.PNG?v=1613271322313">
         </a-assets>
 
+        <a-assets>
+            <audio id="sound-asset-3" preload="auto" src="https://cdn.glitch.com/8df12c73-b111-4f48-bd1f-f0cb83387d79%2Fblade_runner_ambient.mp3?v=1614323183996" crossorigin="anonymous"></audio>
+        </a-assets>
+
+        <a-assets>
+            <audio id="sound-asset-4" preload="auto" src="https://cdn.glitch.com/8df12c73-b111-4f48-bd1f-f0cb83387d79%2Fold_europe.mp3?v=1616786604472"  crossorigin="anonymous"></audio>
+        </a-assets>
+
+        <a-assets>
+            <audio id="sound-asset-2" preload="auto" src="https://cdn.glitch.com/8df12c73-b111-4f48-bd1f-f0cb83387d79%2Fcinematic_music.mp3?v=1616788185050" crossorigin="anonymous"></audio>
+        </a-assets>
+
+        <a-assets>
+            <audio id="sound-asset-1" preload="auto" src="https://cdn.glitch.com/8df12c73-b111-4f48-bd1f-f0cb83387d79%2Frelaxing_symphony.mp3?v=1616788374277" crossorigin="anonymous"></audio>
+        </a-assets>
+
+        <!-- Sound Entities-->
+        <a-entity id="strata-sound-1" position="0 0 0" sound="src: #sound-asset-1; volume: .5; loop: true"></a-entity>
+        <a-entity id="strata-sound-2" position="0 5 0" sound="src: #sound-asset-2; volume: .5; loop: true"></a-entity>
+        <a-entity id="strata-sound-3" position="0 10 0" sound="src: #sound-asset-3; volume: .5; loop: true"></a-entity>
+        <a-entity id="strata-sound-4" position="0 15 0" sound="src: #sound-asset-4; volume: .3; loop: true"></a-entity>
+
         <!-- Media Entities -->
         <a-curvedimage id="video1" media-video networked src="#big-buck-vid" class="interactable" position="11 4 -5" rotation="0 90 0" height="4.0" radius="5.7" theta-length="72"></a-curvedimage>
-        <a-curvedimage src="#curvy-image"  media-image networked class="interactable" height="5.0" radius="5.7" theta-length="72" position="-12 1 4" rotation="0 -80 0" scale="2 2 2" visible="true"></a-curvedimage>
+        <a-curvedimage src="#curvy-image"  media-image networked class="interactable" height="4.0" radius="5.7" theta-length="72" position="-12 5 4" rotation="0 -80 0" scale="2 2 2" visible="true"></a-curvedimage>
 
         <!-- Primitive Entities -->
         <a-circle id="center-of-room" position="0 0.5 0" rotation="-90 0 0" scale=".5 .5 .5" color="black"></a-circle>
@@ -51,7 +73,7 @@
 
         <!--Environment-->
         <a-sky src="https://cdn.glitch.com/7e18fbf8-9686-4cf7-91f9-4a6bbdb54f5e%2Fsky.jpg?1544174075054"></a-sky>
-        <a-plane id="floor" color="#F2CF9D" height="20" width="20" rotation="-90 0 0" position="0 0.2 0" scale="2.5 2.5 2.5"></a-plane>
+        <a-plane id="floor" color="grey" height="20" width="20" rotation="-90 0 0" position="0 0.2 0" scale="2.5 2.5 2.5"></a-plane>
 
         <!-- Camera & Hand Controls -->
 
@@ -62,6 +84,7 @@
                 <a-text id="pos-text" value="" opacity="0.5" align="center"></a-text>
                 <a-text id="angle-text" value="" opacity="0.5" align="center"></a-text>
                 <a-text id="quad-text" value="" opacity="0.5" align="center"></a-text>
+                <a-text id="strata-text" value="" opacity="0.5" align="center"></a-text>
             </a-entity>
             </a-entity>
             
@@ -70,6 +93,6 @@
             
         </a-entity>
     </a-scene>
-    <script src="js/active-by-quad.js"></script>
+    <script src="js/active-by-strata.js"></script>
 </body>
 </html>

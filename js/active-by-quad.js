@@ -8,6 +8,11 @@ let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked
 const posTextEl = document.querySelector("#pos-text");
 const angleTextEl = document.querySelector("#angle-text");
 const quadTextEl = document.querySelector("#quad-text");
+const strataTextEl = document.querySelector("#strata-text");
+
+//Music entities
+let strataMusicEntities = document.querySelectorAll("[sound]");
+console.log("strataMusicEntities.lenght " + strataMusicEntities.length);
 
 //Query all entity assets
 let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
@@ -18,6 +23,11 @@ const ORIGIN_Z = 0;
 let userCurrQuad = null;
 let userPrevQuad = null;
 
+let userCurrStrata = 0;
+let userPrevStrata = 0;
+
+//Start scene
+// strataMusicEntities[0].components.sound.playSound();
 determineUserQuad();
 assignQuadsToEntities(allEntityArray);
 
@@ -40,6 +50,13 @@ setInterval(function() {
     updateVisible(userCurrQuad, userPrevQuad); 
     userPrevQuad = userCurrQuad;
   }   
+  
+  //Check if user left the strata
+  if(userPrevStrata != userCurrStrata){
+    //Update background sound
+    updateActiveMusic(userCurrStrata, userPrevStrata);
+    userPrevStrata = userCurrStrata;
+  }
 }, 1000/80);
 
 function assignQuadsToEntities(entityArr){
@@ -91,24 +108,51 @@ function determineUserQuad(){
   let currAngle = calcAngle(ORIGIN_X, ORIGIN_Z, playerPos.x, playerPos.z).toFixed(2);
   userCurrQuad = calcQuad(currAngle);
 
-  if(posTextEl && angleTextEl && quadTextEl){
-    updateHUDText(playerPos, currAngle, userCurrQuad);
+  //Calculate user current strata
+  userCurrStrata = calcStrata(playerPos.y);
+
+  if(posTextEl && angleTextEl && quadTextEl && strataTextEl){
+    updateHUDText(playerPos, currAngle, userCurrQuad, userCurrStrata);
   }
 }
 
-function updateHUDText(playerPos, currAngle, userCurrQuad){
+function updateHUDText(playerPos, currAngle, userCurrQuad, userStrata){
   //Update user position text
   posTextEl.setAttribute("value", "Position: " + playerPos.x.toFixed(2) + " " + playerPos.y.toFixed(2) + " " + playerPos.z.toFixed(2) + " "); 
   //Update user angle text
   angleTextEl.setAttribute("value", "\n\nAngle: " + currAngle); 
   //Update user quadrant text
   quadTextEl.setAttribute("value", "\n\n\n\nQuadrant: " + userCurrQuad);
+  //Update user strata text
+  strataTextEl.setAttribute("value", "\n\n\n\n\n\nStrata: " + userStrata);
 }
 
 //Calculate user's angle respective to origin
 function calcAngle(x1, z1, x2, z2) {
     var result = Math.atan2(z1 - z2, x2 - x1) * (180 / Math.PI);
     return result > 0 ? result : 360 + result;
+}
+
+//Calculate the visited strata
+function calcStrata(userHeight){
+  let resultStrata = null;
+
+  if(userHeight > 0 && userHeight <= 5.0){
+    resultStrata = 0;
+  }
+  else if(userHeight > 5.0 && userHeight <= 10.0){
+    resultStrata = 1;
+  }
+  else if(userHeight > 10.0 && userHeight <= 15.0){
+    resultStrata = 2;
+  }
+  else if(userHeight > 15.0 && userHeight <= 20.0){
+    resultStrata = 3;
+  }
+  else{
+    resultStrata = null;
+  }  
+  return resultStrata;
 }
 
 //Calculate the visited quadrant
@@ -144,6 +188,15 @@ function updateVisible(quadCurr, quadPrev){
   
 }
   
+
+function updateActiveMusic(strataCurr, strataPrev){
+  console.log("strataCurr: " + strataCurr);
+  console.log("strataPrev: " + strataPrev);
+  strataMusicEntities[strataPrev].components.sound.stopSound();
+  strataMusicEntities[strataCurr].components.sound.playSound();
+  //strataPrev.components.sound.stopSound();
+  //strataCurr.components.sound.playSound();
+}
 
 
 
