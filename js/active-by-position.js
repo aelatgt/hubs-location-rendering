@@ -1,13 +1,112 @@
+// const assets = document.querySelector('a-assets')
+// assets.insertAdjacentHTML(
+//   'beforeend',
+//   `
+//   <template id="movie-media">
+//     <a-curvedimage  
+//       media-video networked 
+//       src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv" 
+//       class="interactable" 
+//       position="11 4 -5" 
+//       rotation="0 90 0" 
+//       height="4.0" 
+//       radius="5.7" 
+//       theta-length="72">
+//     </a-curvedimage>
+//   </template>
+// `
+// )
+
+// NAF.schemas.add({
+//   template: '#movie-media',
+//   components: [
+//     {
+//       component: 
+//     },
+//   ],
+// })
+
+// entity.setAttribute('networked', {
+//   template: '#movie-media', // Selector for our template
+//   networkId: 'my-movie', // A fixed networkId makes this entity shared for all clients
+//   owner: 'scene', // Prevents newly joined clients from re-initializing the color
+// })
+
+//==========================================================================
+
 //Query user and text elements
 //const sceneEl = document.querySelector('a-scene');
 const cameraEl = document.querySelector("[networked-avatar]"); //query the user
+const playerHUD = document.querySelector("#avatar-pov-node"); //query the HUD
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
 
-//Text entities
-const posTextEl = document.querySelector("#pos-text");
-const angleTextEl = document.querySelector("#angle-text");
-const quadTextEl = document.querySelector("#quad-text");
-const strataTextEl = document.querySelector("#strata-text");
+// Create your A-Frame entities
+const myCube = document.createElement('a-box');
+const myVideo = document.createElement('a-video');
+
+// Create HUD Text
+const posText = document.createElement('a-entity');
+const angleText = document.createElement('a-entity');
+const quadText = document.createElement('a-entity');
+const strataText = document.createElement('a-entity');
+
+// Cube
+myCube.setAttribute('position', { x: 2, y: 1, z: 2 });
+myCube.setAttribute('scale', { x: 1, y: 1, z: 1 });
+myCube.setAttribute('material', { color: 'red' });
+
+// A-Video
+myVideo.setAttribute('position', {x: -2, y: 2, z: -2});
+myVideo.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv');
+myVideo.setAttribute('preload', 'auto');
+myVideo.setAttribute('autoplay', '');
+myVideo.setAttribute('media-video', {src: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv'});
+myVideo.setAttribute('networked', '');
+myVideo.setAttribute('width', 16);
+myVideo.setAttribute('height', 9);
+
+// Position HUD Text
+posText.setAttribute('position', { x: 0, y: 2, z: -5 });
+posText.setAttribute('rotation', {x: 0, y: 0, z: 0});
+posText.setAttribute('text', {value: 'Pos Text'});
+posText.setAttribute('scale', { x: 5, y: 5, z: 5 });
+posText.setAttribute('opacity', 0.5);
+posText.setAttribute('id', 'pos-text-2');
+
+// Angle HUD Text
+angleText.setAttribute('position', { x: 0, y: 1.5, z: -5 });
+angleText.setAttribute('rotation', {x: 0, y: 0, z: 0});
+angleText.setAttribute('text', {value: 'Angle Text'});
+angleText.setAttribute('scale', { x: 5, y: 5, z: 5 });
+angleText.setAttribute('opacity', 0.5);
+angleText.setAttribute('id', 'angle-text-2');
+
+// Quad HUD Text
+quadText.setAttribute('position', { x: 0, y: 1, z: -5 });
+quadText.setAttribute('rotation', {x: 0, y: 0, z: 0});
+quadText.setAttribute('text', {value: 'Quad Text'});
+quadText.setAttribute('scale', { x: 5, y: 5, z: 5 });
+quadText.setAttribute('opacity', 0.5);
+quadText.setAttribute('id', 'quad-text-2');
+
+// Strata HUD Text
+strataText.setAttribute('position', { x: 0, y: .5, z: -5 });
+strataText.setAttribute('rotation', {x: 0, y: 0, z: 0});
+strataText.setAttribute('text', {value: 'Strata Text'});
+strataText.setAttribute('scale', { x: 5, y: 5, z: 5 });
+strataText.setAttribute('opacity', 0.5);
+strataText.setAttribute('id', 'strata-text-2');
+
+// Add HUD Text to the Hubs scene
+playerHUD.appendChild(posText);
+playerHUD.appendChild(angleText);
+playerHUD.appendChild(quadText);
+playerHUD.appendChild(strataText);
+
+APP.scene.appendChild(myCube);
+//APP.scene.appendChild(myVideo);
+
+//=====================================================================================
 
 //Music entities
 let strataMusicEntities = document.querySelectorAll("[sound]");
@@ -110,20 +209,15 @@ function determineUserQuad(){
   //Calculate user current strata
   userCurrStrata = calcStrata(playerPos.y);
 
-  if(posTextEl && angleTextEl && quadTextEl && strataTextEl){
-    updateHUDText(playerPos, currAngle, userCurrQuad, userCurrStrata);
-  }
+  // Update the user's HUD
+  updateHUDText(playerPos, currAngle, userCurrQuad, userCurrStrata);
 }
 
 function updateHUDText(playerPos, currAngle, userCurrQuad, userStrata){
-  //Update user position text
-  posTextEl.setAttribute("value", "Position: " + playerPos.x.toFixed(2) + " " + playerPos.y.toFixed(2) + " " + playerPos.z.toFixed(2) + " "); 
-  //Update user angle text
-  angleTextEl.setAttribute("value", "\n\nAngle: " + currAngle); 
-  //Update user quadrant text
-  quadTextEl.setAttribute("value", "\n\n\n\nQuadrant: " + userCurrQuad);
-  //Update user strata text
-  strataTextEl.setAttribute("value", "\n\n\n\n\n\nStrata: " + userStrata);
+  posText.setAttribute('text', {value: "Position: " + playerPos.x.toFixed(2) + " " + playerPos.y.toFixed(2) + " " + playerPos.z.toFixed(2) + " "});
+  angleText.setAttribute('text', {value: "Angle: " + currAngle});
+  quadText.setAttribute('text', {value: "Quadrant: " + userCurrQuad});
+  strataText.setAttribute('text', {value: "Strata: " + userStrata});
 }
 
 //Calculate user's angle respective to origin
