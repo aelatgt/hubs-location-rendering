@@ -1,10 +1,9 @@
 //Query user and text elements
-const cameraEl = document.querySelector("[networked-avatar]"); //query the user
 //const sceneEl = document.querySelector('a-scene');
-//let interactablesBefore = document.querySelectorAll(".interactable").length;
+const cameraEl = document.querySelector("[networked-avatar]"); //query the user
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
 
-// //Text entities
+//Text entities
 const posTextEl = document.querySelector("#pos-text");
 const angleTextEl = document.querySelector("#angle-text");
 const quadTextEl = document.querySelector("#quad-text");
@@ -12,7 +11,7 @@ const strataTextEl = document.querySelector("#strata-text");
 
 //Music entities
 let strataMusicEntities = document.querySelectorAll("[sound]");
-console.log("strataMusicEntities.lenght " + strataMusicEntities.length);
+console.log("strataMusicEntities.length: " + strataMusicEntities.length);
 
 //Query all entity assets
 let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
@@ -188,10 +187,10 @@ function updateVisible(quadCurr, quadPrev){
   
 }
   
-
+//Activate media in current strata and deactivate those in previous strata
 function updateActiveMusic(strataCurr, strataPrev){
-  console.log("strataCurr: " + strataCurr);
-  console.log("strataPrev: " + strataPrev);
+  console.log("Current Strata: " + strataCurr);
+  console.log("Previous Strata: " + strataPrev);
   
   if(strataPrev != null){
     strataMusicEntities[strataPrev].components.sound.stopSound();
