@@ -98,7 +98,7 @@ myVideo.setAttribute('height', 9);
 myVideo.setAttribute('visible', true);
 
 // Position HUD Text
-posText.setAttribute('position', { x: 0, y: 2, z: -5 });
+posText.setAttribute('position', { x: 0, y: 2, z: -4 });
 posText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 posText.setAttribute('text', {value: 'Pos Text'});
 posText.setAttribute('scale', { x: 5, y: 5, z: 5 });
@@ -106,7 +106,7 @@ posText.setAttribute('opacity', 0.5);
 posText.setAttribute('id', 'pos-text');
 
 // Angle HUD Text
-angleText.setAttribute('position', { x: 0, y: 1.5, z: -5 });
+angleText.setAttribute('position', { x: 0, y: 1.5, z: -4 });
 angleText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 angleText.setAttribute('text', {value: 'Angle Text'});
 angleText.setAttribute('scale', { x: 5, y: 5, z: 5 });
@@ -114,7 +114,7 @@ angleText.setAttribute('opacity', 0.5);
 angleText.setAttribute('id', 'angle-text');
 
 // Quad HUD Text
-quadText.setAttribute('position', { x: 0, y: 1, z: -5 });
+quadText.setAttribute('position', { x: 0, y: 1, z: -4 });
 quadText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 quadText.setAttribute('text', {value: 'Quad Text'});
 quadText.setAttribute('scale', { x: 5, y: 5, z: 5 });
@@ -122,7 +122,7 @@ quadText.setAttribute('opacity', 0.5);
 quadText.setAttribute('id', 'quad-text');
 
 // Strata HUD Text
-strataText.setAttribute('position', { x: 0, y: .5, z: -5 });
+strataText.setAttribute('position', { x: 0, y: .5, z: -4 });
 strataText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 strataText.setAttribute('text', {value: 'Strata Text'});
 strataText.setAttribute('scale', { x: 5, y: 5, z: 5 });
@@ -135,11 +135,19 @@ playerHUD.appendChild(angleText);
 playerHUD.appendChild(quadText);
 playerHUD.appendChild(strataText);
 
+//Code for testing on Mozilla Hubs
 APP.scene.appendChild(cubeQuad1);
 APP.scene.appendChild(cubeQuad2);
 APP.scene.appendChild(cubeQuad3);
 APP.scene.appendChild(cubeQuad4);
-APP.scene.appendChild(myVideo);
+// APP.scene.appendChild(myVideo);
+
+//Code for testing on A-Frame
+// document.querySelector("a-scene").appendChild(cubeQuad1);
+// document.querySelector("a-scene").appendChild(cubeQuad2);
+// document.querySelector("a-scene").appendChild(cubeQuad3);
+// document.querySelector("a-scene").appendChild(cubeQuad4);
+
 
 
 //==================================================================================================
