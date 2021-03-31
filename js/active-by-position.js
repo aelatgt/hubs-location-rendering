@@ -32,16 +32,18 @@
 //   owner: 'scene', // Prevents newly joined clients from re-initializing the color
 // })
 
-//==========================================================================
+//=========================================================================================
 
-//Query user and text elements
-//const sceneEl = document.querySelector('a-scene');
+//Query user elements
 const cameraEl = document.querySelector("[networked-avatar]"); //query the user
 const playerHUD = document.querySelector("#avatar-pov-node"); //query the HUD
-let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
+//const sceneEl = document.querySelector('a-scene');
 
 // Create your A-Frame entities
-const myCube = document.createElement('a-box');
+const cubeQuad1 = document.createElement('a-box');
+const cubeQuad2 = document.createElement('a-box');
+const cubeQuad3 = document.createElement('a-box');
+const cubeQuad4 = document.createElement('a-box');
 const myVideo = document.createElement('a-video');
 
 // Create HUD Text
@@ -50,10 +52,38 @@ const angleText = document.createElement('a-entity');
 const quadText = document.createElement('a-entity');
 const strataText = document.createElement('a-entity');
 
-// Cube
-myCube.setAttribute('position', { x: 2, y: 1, z: 2 });
-myCube.setAttribute('scale', { x: 1, y: 1, z: 1 });
-myCube.setAttribute('material', { color: 'red' });
+// Cubes in Quads
+cubeQuad1.setAttribute('position', { x: 5, y: 2, z: -5 });
+cubeQuad1.setAttribute('scale', { x: 1, y: 1, z: 1 });
+cubeQuad1.setAttribute('material', { color: 'red', shader: 'flat' });
+cubeQuad1.setAttribute('class', 'quad1');
+cubeQuad1.setAttribute('visible', false);
+// cubeQuad1.setAttribute('gltf-model-plus', "");
+// cubeQuad1.setAttribute('networked', "");
+
+cubeQuad2.setAttribute('position', { x: -5, y: 2, z: -5 });
+cubeQuad2.setAttribute('scale', { x: 1, y: 1, z: 1 });
+cubeQuad2.setAttribute('material', { color: 'blue', shader: 'flat' });
+cubeQuad2.setAttribute('class', 'quad2');
+cubeQuad2.setAttribute('visible', false);
+// cubeQuad2.setAttribute('gltf-model-plus', "");
+// cubeQuad2.setAttribute('networked', "");
+
+cubeQuad3.setAttribute('position', { x: -5, y: 2, z: 5 });
+cubeQuad3.setAttribute('scale', { x: 1, y: 1, z: 1 });
+cubeQuad3.setAttribute('material', { color: 'green', shader: 'flat' });
+cubeQuad3.setAttribute('class', 'quad3');
+cubeQuad3.setAttribute('visible', false);
+// cubeQuad3.setAttribute('gltf-model-plus', "");
+// cubeQuad3.setAttribute('networked', "");
+
+cubeQuad4.setAttribute('position', { x: 5, y: 2, z: 5 });
+cubeQuad4.setAttribute('scale', { x: 1, y: 1, z: 1 });
+cubeQuad4.setAttribute('material', { color: 'yellow', shader: 'flat' });
+cubeQuad4.setAttribute('class', 'quad4');
+cubeQuad4.setAttribute('visible', false);
+// cubeQuad4.setAttribute('gltf-model-plus', "");
+// cubeQuad4.setAttribute('networked', "");
 
 // A-Video
 myVideo.setAttribute('position', {x: -2, y: 2, z: -2});
@@ -71,7 +101,7 @@ posText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 posText.setAttribute('text', {value: 'Pos Text'});
 posText.setAttribute('scale', { x: 5, y: 5, z: 5 });
 posText.setAttribute('opacity', 0.5);
-posText.setAttribute('id', 'pos-text-2');
+posText.setAttribute('id', 'pos-text');
 
 // Angle HUD Text
 angleText.setAttribute('position', { x: 0, y: 1.5, z: -5 });
@@ -79,7 +109,7 @@ angleText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 angleText.setAttribute('text', {value: 'Angle Text'});
 angleText.setAttribute('scale', { x: 5, y: 5, z: 5 });
 angleText.setAttribute('opacity', 0.5);
-angleText.setAttribute('id', 'angle-text-2');
+angleText.setAttribute('id', 'angle-text');
 
 // Quad HUD Text
 quadText.setAttribute('position', { x: 0, y: 1, z: -5 });
@@ -87,7 +117,7 @@ quadText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 quadText.setAttribute('text', {value: 'Quad Text'});
 quadText.setAttribute('scale', { x: 5, y: 5, z: 5 });
 quadText.setAttribute('opacity', 0.5);
-quadText.setAttribute('id', 'quad-text-2');
+quadText.setAttribute('id', 'quad-text');
 
 // Strata HUD Text
 strataText.setAttribute('position', { x: 0, y: .5, z: -5 });
@@ -95,7 +125,7 @@ strataText.setAttribute('rotation', {x: 0, y: 0, z: 0});
 strataText.setAttribute('text', {value: 'Strata Text'});
 strataText.setAttribute('scale', { x: 5, y: 5, z: 5 });
 strataText.setAttribute('opacity', 0.5);
-strataText.setAttribute('id', 'strata-text-2');
+strataText.setAttribute('id', 'strata-text');
 
 // Add HUD Text to the Hubs scene
 playerHUD.appendChild(posText);
@@ -103,10 +133,17 @@ playerHUD.appendChild(angleText);
 playerHUD.appendChild(quadText);
 playerHUD.appendChild(strataText);
 
-APP.scene.appendChild(myCube);
+APP.scene.appendChild(cubeQuad1);
+APP.scene.appendChild(cubeQuad2);
+APP.scene.appendChild(cubeQuad3);
+APP.scene.appendChild(cubeQuad4);
 //APP.scene.appendChild(myVideo);
 
-//=====================================================================================
+
+//==================================================================================================
+//Query all interactable networked elements
+let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
+console.log("interactables on start: " + interactablesBefore);
 
 //Music entities
 let strataMusicEntities = document.querySelectorAll("[sound]");
@@ -152,7 +189,9 @@ setInterval(function() {
   //Check if user left the strata
   if(userPrevStrata != userCurrStrata){
     //Update background sound
-    updateActiveMusic(userCurrStrata, userPrevStrata);
+    if(strataMusicEntities.length > 0){
+      updateActiveMusic(userCurrStrata, userPrevStrata);
+    }  
     userPrevStrata = userCurrStrata;
   }
 }, 1000/80);
@@ -230,16 +269,16 @@ function calcAngle(x1, z1, x2, z2) {
 function calcStrata(userHeight){
   let resultStrata = null;
 
-  if(userHeight > 0 && userHeight <= 5.0){
+  if(userHeight > 0 && userHeight <= 2.5){
     resultStrata = 0;
   }
-  else if(userHeight > 5.0 && userHeight <= 10.0){
+  else if(userHeight > 2.5 && userHeight <= 5.0){
     resultStrata = 1;
   }
-  else if(userHeight > 10.0 && userHeight <= 15.0){
+  else if(userHeight > 5.0 && userHeight <= 7.5){
     resultStrata = 2;
   }
-  else if(userHeight > 15.0 && userHeight <= 20.0){
+  else if(userHeight > 7.5 && userHeight <= 10.0){
     resultStrata = 3;
   }
   else{
