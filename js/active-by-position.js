@@ -86,14 +86,16 @@ cubeQuad4.setAttribute('visible', false);
 // cubeQuad4.setAttribute('networked', "");
 
 // A-Video
-myVideo.setAttribute('position', {x: -2, y: 2, z: -2});
+myVideo.setAttribute('position', {x: 0, y: 5, z: 0});
 myVideo.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv');
 myVideo.setAttribute('preload', 'auto');
 myVideo.setAttribute('autoplay', '');
 myVideo.setAttribute('media-video', {src: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv'});
 myVideo.setAttribute('networked', '');
+// myVideo.setAttribute('media-loader', "");
 myVideo.setAttribute('width', 16);
 myVideo.setAttribute('height', 9);
+myVideo.setAttribute('visible', true);
 
 // Position HUD Text
 posText.setAttribute('position', { x: 0, y: 2, z: -5 });
@@ -137,7 +139,7 @@ APP.scene.appendChild(cubeQuad1);
 APP.scene.appendChild(cubeQuad2);
 APP.scene.appendChild(cubeQuad3);
 APP.scene.appendChild(cubeQuad4);
-//APP.scene.appendChild(myVideo);
+APP.scene.appendChild(myVideo);
 
 
 //==================================================================================================
