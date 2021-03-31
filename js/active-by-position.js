@@ -53,7 +53,7 @@ const quadText = document.createElement('a-entity');
 const strataText = document.createElement('a-entity');
 
 // Cubes in Quads
-cubeQuad1.setAttribute('position', { x: 5, y: 2, z: -5 });
+cubeQuad1.setAttribute('position', { x: 5, y: 1, z: -5 });
 cubeQuad1.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad1.setAttribute('material', { color: 'red', shader: 'flat' });
 cubeQuad1.setAttribute('class', 'quad1');
@@ -61,7 +61,7 @@ cubeQuad1.setAttribute('visible', false);
 // cubeQuad1.setAttribute('gltf-model-plus', "");
 // cubeQuad1.setAttribute('networked', "");
 
-cubeQuad2.setAttribute('position', { x: -5, y: 2, z: -5 });
+cubeQuad2.setAttribute('position', { x: -5, y: 1, z: -5 });
 cubeQuad2.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad2.setAttribute('material', { color: 'blue', shader: 'flat' });
 cubeQuad2.setAttribute('class', 'quad2');
@@ -69,7 +69,7 @@ cubeQuad2.setAttribute('visible', false);
 // cubeQuad2.setAttribute('gltf-model-plus', "");
 // cubeQuad2.setAttribute('networked', "");
 
-cubeQuad3.setAttribute('position', { x: -5, y: 2, z: 5 });
+cubeQuad3.setAttribute('position', { x: -5, y: 1, z: 5 });
 cubeQuad3.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad3.setAttribute('material', { color: 'green', shader: 'flat' });
 cubeQuad3.setAttribute('class', 'quad3');
@@ -77,7 +77,7 @@ cubeQuad3.setAttribute('visible', false);
 // cubeQuad3.setAttribute('gltf-model-plus', "");
 // cubeQuad3.setAttribute('networked', "");
 
-cubeQuad4.setAttribute('position', { x: 5, y: 2, z: 5 });
+cubeQuad4.setAttribute('position', { x: 5, y: 1, z: 5 });
 cubeQuad4.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad4.setAttribute('material', { color: 'yellow', shader: 'flat' });
 cubeQuad4.setAttribute('class', 'quad4');
@@ -253,7 +253,7 @@ function determineUserQuad(){
 }
 
 function updateHUDText(playerPos, currAngle, userCurrQuad, userStrata){
-  posText.setAttribute('text', {value: "Position: " + playerPos.x.toFixed(2) + " " + playerPos.y.toFixed(2) + " " + playerPos.z.toFixed(2) + " "});
+  posText.setAttribute('text', {value: "Position: " + playerPos.x.toFixed(2) + ", " + playerPos.y.toFixed(2) + ", " + playerPos.z.toFixed(2) + " "});
   angleText.setAttribute('text', {value: "Angle: " + currAngle});
   quadText.setAttribute('text', {value: "Quadrant: " + userCurrQuad});
   strataText.setAttribute('text', {value: "Strata: " + userStrata});
