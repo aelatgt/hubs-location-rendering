@@ -86,16 +86,16 @@ cubeQuad4.setAttribute('visible', false);
 // cubeQuad4.setAttribute('networked', "");
 
 // A-Video
-myVideo.setAttribute('position', {x: 0, y: 5, z: 0});
-myVideo.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv');
-myVideo.setAttribute('preload', 'auto');
-myVideo.setAttribute('autoplay', '');
-myVideo.setAttribute('media-video', {src: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv'});
-myVideo.setAttribute('networked', '');
-// myVideo.setAttribute('media-loader', "");
-myVideo.setAttribute('width', 16);
-myVideo.setAttribute('height', 9);
-myVideo.setAttribute('visible', true);
+// myVideo.setAttribute('position', {x: 0, y: 5, z: 0});
+// myVideo.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv');
+// myVideo.setAttribute('preload', 'auto');
+// myVideo.setAttribute('autoplay', '');
+// myVideo.setAttribute('media-video', {src: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv'});
+// myVideo.setAttribute('networked', '');
+// // myVideo.setAttribute('media-loader', "");
+// myVideo.setAttribute('width', 16);
+// myVideo.setAttribute('height', 9);
+// myVideo.setAttribute('visible', true);
 
 // Position HUD Text
 posText.setAttribute('position', { x: 0, y: 2, z: -4 });
@@ -136,17 +136,17 @@ playerHUD.appendChild(quadText);
 playerHUD.appendChild(strataText);
 
 //Code for testing on Mozilla Hubs
-APP.scene.appendChild(cubeQuad1);
-APP.scene.appendChild(cubeQuad2);
-APP.scene.appendChild(cubeQuad3);
-APP.scene.appendChild(cubeQuad4);
+// APP.scene.appendChild(cubeQuad1);
+// APP.scene.appendChild(cubeQuad2);
+// APP.scene.appendChild(cubeQuad3);
+// APP.scene.appendChild(cubeQuad4);
 // APP.scene.appendChild(myVideo);
 
 //Code for testing on A-Frame
-// document.querySelector("a-scene").appendChild(cubeQuad1);
-// document.querySelector("a-scene").appendChild(cubeQuad2);
-// document.querySelector("a-scene").appendChild(cubeQuad3);
-// document.querySelector("a-scene").appendChild(cubeQuad4);
+document.querySelector("a-scene").appendChild(cubeQuad1);
+document.querySelector("a-scene").appendChild(cubeQuad2);
+document.querySelector("a-scene").appendChild(cubeQuad3);
+document.querySelector("a-scene").appendChild(cubeQuad4);
 
 
 
@@ -170,6 +170,8 @@ let userPrevQuad = null;
 
 let userCurrStrata = 0;
 let userPrevStrata = 0;
+
+let textureCacheArray = [];
 
 //Start scene
 // strataMusicEntities[0].components.sound.playSound();
@@ -325,9 +327,25 @@ function updateVisible(quadCurr, quadPrev){
     let quadCurrArray = document.querySelectorAll(`.quad${quadCurr}`);
     let quadPrevArray = document.querySelectorAll(`.quad${quadPrev}`);
 
-    quadCurrArray.forEach(element => element.setAttribute("visible", true));
-    quadPrevArray.forEach(element => element.setAttribute("visible", false));
-  
+    for(let i = 0; i < quadPrevArray.length; i++){
+      // quadPrevArray[i].setAttribute("visible", false);
+
+      if(quadPrevArray[i].hasAttribute("media-video")){   
+        // quadPrevArray[i].remove();
+
+        textureCacheArray[i] = [quadPrevArray[i].time, quadPrevArray[i].texture];
+        quadPrevArray[i].setAttribute("media-video", {src: "", audioSrc: ""});
+        console.log("textureCacheArray.length: " + textureCacheArray.length);
+        console.log("textureCacheArray time: " + textureCacheArray[0]);    
+      }
+    }
+
+    for(let i = 0; i < quadCurrArray.length; i++){
+      quadCurrArray[i].setAttribute("visible", true);
+      if(quadCurrArray[i].hasAttribute("media-video")){
+      //  quadCurrArray[i].setAttribute("media-video", {src: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv"});
+      }      
+    }    
 }
   
 //Activate media in current strata and deactivate those in previous strata
