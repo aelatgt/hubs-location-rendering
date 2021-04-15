@@ -1,10 +1,8 @@
 //=========================================================================================
-// http://www.aelatgt.org/position-based-rendering/js/active-by-position.js
+// https://www.aelatgt.org/position-based-rendering/js/active-by-position.js
 //=========================================================================================
 
-//Query user elements
-//const cameraEl = document.querySelector("[networked-avatar]"); //query the user
-const cameraEl = document.querySelector("avatar-rig"); //query the user
+//Query the player HUD
 const playerHUD = document.querySelector("#avatar-pov-node"); //query the HUD
 //const sceneEl = document.querySelector('a-scene');
 
@@ -130,6 +128,10 @@ APP.scene.appendChild(cubeQuad4);
 
 
 //==================================================================================================
+//Query user elements
+//const cameraEl = document.querySelector("[networked-avatar]"); //query the user
+const cameraEl = APP.scene.camera; //query the user
+
 //Query all interactable networked elements
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
 console.log("interactables on start: " + interactablesBefore);
