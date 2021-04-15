@@ -129,8 +129,8 @@ APP.scene.appendChild(cubeQuad4);
 
 //==================================================================================================
 //Query user elements
-//const cameraEl = document.querySelector("[networked-avatar]"); //query the user
-const cameraEl = APP.scene.camera; //query the user
+const cameraEl = document.querySelector("#avatar-rig"); //query the user
+//const cameraEl = APP.scene.camera; //query the user
 
 //Query all interactable networked elements
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
