@@ -1,7 +1,10 @@
 //=========================================================================================
+// http://www.aelatgt.org/position-based-rendering/js/active-by-position.js
+//=========================================================================================
 
 //Query user elements
-const cameraEl = document.querySelector("[networked-avatar]"); //query the user
+//const cameraEl = document.querySelector("[networked-avatar]"); //query the user
+const cameraEl = document.querySelector("avatar-rig"); //query the user
 const playerHUD = document.querySelector("#avatar-pov-node"); //query the HUD
 //const sceneEl = document.querySelector('a-scene');
 
