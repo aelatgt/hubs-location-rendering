@@ -2,13 +2,22 @@
 // https://www.aelatgt.org/position-based-rendering/js/active-by-position.js
 //=========================================================================================
 
-//Query the player HUD
+let ngrok_code = "b5a7fdfc77fa";
+
+//Query user elements
+const cameraEl = document.querySelector("#avatar-rig"); //query the user
+//const cameraEl = APP.scene.camera; //query the user
 const playerHUD = document.querySelector("#avatar-pov-node"); //query the HUD
 //const sceneEl = document.querySelector('a-scene');
 
+const audio_link_1 = "https://" + ngrok_code + ".ngrok.io/assets/cinematic_music.mp3";
+const audio_link_2 = "https://" + ngrok_code + ".ngrok.io/assets/relaxing_symphony.mp3";
+const audio_link_3 = "https://" + ngrok_code + ".ngrok.io/assets/old_lullaby.mp3";
+const audio_link_4 = "https://" + ngrok_code + ".ngrok.io/assets/blade_runner_ambient.mp3";
+
 //Insert sound into the scene
 const audio = document.createElement('audio');
-audio.src = "https://b526941b8724.ngrok.io/assets/cinematic_music.mp3";
+audio.src = "https://.ngrok.io/assets/cinematic_music.mp3";
 audio.preload = "auto";
 audio.id = "a-mysound";
 
@@ -43,7 +52,7 @@ cubeQuad1.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad1.setAttribute('material', { color: 'red', shader: 'flat' });
 cubeQuad1.setAttribute('class', 'quad1');
 cubeQuad1.setAttribute('visible', false);
-cubeQuad1.setAttribute('sound', {src: "url(https://b526941b8724.ngrok.io/assets/cinematic_music.mp3)", volume: 1, loop: true, autoplay: false});
+cubeQuad1.setAttribute('sound', {src: audio_link_1, volume: 1, loop: true, autoplay: false});
 // cubeQuad1.setAttribute('gltf-model-plus', "");
 // cubeQuad1.setAttribute('networked', "");
 
@@ -52,6 +61,7 @@ cubeQuad2.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad2.setAttribute('material', { color: 'blue', shader: 'flat' });
 cubeQuad2.setAttribute('class', 'quad2');
 cubeQuad2.setAttribute('visible', false);
+cubeQuad2.setAttribute('sound', {src: audio_link_2, volume: 1, loop: true, autoplay: false});
 // cubeQuad2.setAttribute('gltf-model-plus', "");
 // cubeQuad2.setAttribute('networked', "");
 
@@ -60,6 +70,7 @@ cubeQuad3.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad3.setAttribute('material', { color: 'green', shader: 'flat' });
 cubeQuad3.setAttribute('class', 'quad3');
 cubeQuad3.setAttribute('visible', false);
+cubeQuad3.setAttribute('sound', {src: audio_link_3, volume: 1, loop: true, autoplay: false});
 // cubeQuad3.setAttribute('gltf-model-plus', "");
 // cubeQuad3.setAttribute('networked', "");
 
@@ -68,6 +79,7 @@ cubeQuad4.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad4.setAttribute('material', { color: 'yellow', shader: 'flat' });
 cubeQuad4.setAttribute('class', 'quad4');
 cubeQuad4.setAttribute('visible', false);
+cubeQuad4.setAttribute('sound', {src: audio_link_4, volume: 1, loop: true, autoplay: false});
 // cubeQuad4.setAttribute('gltf-model-plus', "");
 // cubeQuad4.setAttribute('networked', "");
 
@@ -128,9 +140,7 @@ APP.scene.appendChild(cubeQuad4);
 
 
 //==================================================================================================
-//Query user elements
-const cameraEl = document.querySelector("#avatar-rig"); //query the user
-//const cameraEl = APP.scene.camera; //query the user
+
 
 //Query all interactable networked elements
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
