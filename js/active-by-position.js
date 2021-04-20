@@ -2,43 +2,17 @@
 // https://www.aelatgt.org/position-based-rendering/js/active-by-position.js
 //=========================================================================================
 
-let ngrok_code = "b5a7fdfc77fa";
-
 //Query user elements
 const cameraEl = document.querySelector("#avatar-rig"); //query the user
 //const cameraEl = APP.scene.camera; //query the user
 const playerHUD = document.querySelector("#avatar-pov-node"); //query the HUD
 //const sceneEl = document.querySelector('a-scene');
 
-const audio_link_1 = "https://" + ngrok_code + ".ngrok.io/assets/cinematic_music.mp3";
-const audio_link_2 = "https://" + ngrok_code + ".ngrok.io/assets/relaxing_symphony.mp3";
-const audio_link_3 = "https://" + ngrok_code + ".ngrok.io/assets/old_lullaby.mp3";
-const audio_link_4 = "https://" + ngrok_code + ".ngrok.io/assets/blade_runner_ambient.mp3";
-
-//Insert sound into the scene
-const audio = document.createElement('audio');
-audio.src = "https://.ngrok.io/assets/cinematic_music.mp3";
-audio.preload = "auto";
-audio.id = "a-mysound";
-
-const assets = document.querySelector("a-assets");
-assets.appendChild(audio);
-
-const mySound = document.createElement("a-sound");
-mySound.setAttribute("src", audio);
-//mySound.setAttribute("preload", "auto");
-mySound.setAttribute("crossorigin", "anonymous");
-mySound.setAttribute("autoplay", "true");
-mySound.setAttribute("position", "0 1 0");
-mySound.setAttribute("id", "mysound");
-mySound.setAttribute("media-loader");
-
 // Create your A-Frame entities
 const cubeQuad1 = document.createElement('a-box');
 const cubeQuad2 = document.createElement('a-box');
 const cubeQuad3 = document.createElement('a-box');
 const cubeQuad4 = document.createElement('a-box');
-const myVideo = document.createElement('a-video');
 
 // Create HUD Text
 const posText = document.createElement('a-entity');
@@ -46,42 +20,30 @@ const angleText = document.createElement('a-entity');
 const quadText = document.createElement('a-entity');
 const strataText = document.createElement('a-entity');
 
-// Cubes in Quads
+// 1 Cube per Quadrant
 cubeQuad1.setAttribute('position', { x: 5, y: 1, z: -5 });
 cubeQuad1.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad1.setAttribute('material', { color: 'red', shader: 'flat' });
 cubeQuad1.setAttribute('class', 'quad1');
 cubeQuad1.setAttribute('visible', false);
-cubeQuad1.setAttribute('sound', {src: audio_link_1, volume: 1, loop: true, autoplay: false});
-// cubeQuad1.setAttribute('gltf-model-plus', "");
-// cubeQuad1.setAttribute('networked', "");
 
 cubeQuad2.setAttribute('position', { x: -5, y: 1, z: -5 });
 cubeQuad2.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad2.setAttribute('material', { color: 'blue', shader: 'flat' });
 cubeQuad2.setAttribute('class', 'quad2');
 cubeQuad2.setAttribute('visible', false);
-cubeQuad2.setAttribute('sound', {src: audio_link_2, volume: 1, loop: true, autoplay: false});
-// cubeQuad2.setAttribute('gltf-model-plus', "");
-// cubeQuad2.setAttribute('networked', "");
 
 cubeQuad3.setAttribute('position', { x: -5, y: 1, z: 5 });
 cubeQuad3.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad3.setAttribute('material', { color: 'green', shader: 'flat' });
 cubeQuad3.setAttribute('class', 'quad3');
 cubeQuad3.setAttribute('visible', false);
-cubeQuad3.setAttribute('sound', {src: audio_link_3, volume: 1, loop: true, autoplay: false});
-// cubeQuad3.setAttribute('gltf-model-plus', "");
-// cubeQuad3.setAttribute('networked', "");
 
 cubeQuad4.setAttribute('position', { x: 5, y: 1, z: 5 });
 cubeQuad4.setAttribute('scale', { x: 1, y: 1, z: 1 });
 cubeQuad4.setAttribute('material', { color: 'yellow', shader: 'flat' });
 cubeQuad4.setAttribute('class', 'quad4');
 cubeQuad4.setAttribute('visible', false);
-cubeQuad4.setAttribute('sound', {src: audio_link_4, volume: 1, loop: true, autoplay: false});
-// cubeQuad4.setAttribute('gltf-model-plus', "");
-// cubeQuad4.setAttribute('networked', "");
 
 // Position HUD Text
 posText.setAttribute('position', { x: 0, y: 2, z: -4 });
@@ -121,15 +83,11 @@ playerHUD.appendChild(angleText);
 playerHUD.appendChild(quadText);
 playerHUD.appendChild(strataText);
 
-// APP.scene.appendChild(myVideo);
-
 //Code for testing on Mozilla Hubs
 APP.scene.appendChild(cubeQuad1);
 APP.scene.appendChild(cubeQuad2);
 APP.scene.appendChild(cubeQuad3);
 APP.scene.appendChild(cubeQuad4);
-
-// APP.scene.appendChild(mySound);
 
 // //Code for testing on A-Frame
 // document.querySelector("a-scene").appendChild(cubeQuad1);
@@ -146,9 +104,6 @@ APP.scene.appendChild(cubeQuad4);
 let interactablesBefore = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]").length;
 console.log("interactables on start: " + interactablesBefore);
 
-//Music entities
-let strataMusicEntities = document.querySelectorAll("[sound]");
-console.log("strataMusicEntities.length: " + strataMusicEntities.length);
 
 //Query all entity assets
 let allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
@@ -161,12 +116,6 @@ let userPrevQuad = null;
 
 let userCurrStrata = 0;
 let userPrevStrata = 0;
-
-let textureCacheArray = [];
-
-//Start scene
-strataMusicEntities[0].components.sound.playSound();
-
 
 determineUserQuad();
 assignQuadsToEntities(allEntityArray);
@@ -192,17 +141,12 @@ setInterval(function() {
   }   
   
   //Check if user left the strata
-  if(userPrevStrata != userCurrStrata){
-    //Update background sound
-    if(strataMusicEntities.length > 0){
-      updateActiveMusic(userCurrStrata, userPrevStrata);
-    }  
+  if(userPrevStrata != userCurrStrata){ 
     userPrevStrata = userCurrStrata;
   }
 }, 1000/80);
 
 function assignQuadsToEntities(entityArr){
-  //entityArr.forEach(element => element.setAttribute("visible", false));
 
   //Calculate and assign corresponding "quad" class to each entity 
   for(let i = 0; i < entityArr.length; i++){
@@ -243,7 +187,6 @@ function assignQuadsToEntities(entityArr){
 }
 
 function determineUserQuad(){
-  //let localPos = cameraEl.object3D.position;
   let playerPos = cameraEl.object3D.getWorldPosition();
  
   //Calculate user current angle and quadrant
@@ -322,37 +265,13 @@ function updateVisible(quadCurr, quadPrev){
 
     for(let i = 0; i < quadPrevArray.length; i++){
       quadPrevArray[i].setAttribute("visible", false);
-
-      // if(quadPrevArray[i].hasAttribute("media-video")){   
-      //   // quadPrevArray[i].remove();
-
-      //   textureCacheArray[i] = [quadPrevArray[i].time, quadPrevArray[i].texture];
-      //   quadPrevArray[i].setAttribute("media-video", {src: "", audioSrc: ""});
-      //   console.log("textureCacheArray.length: " + textureCacheArray.length);
-      //   console.log("textureCacheArray time: " + textureCacheArray[0]);    
-      // }
     }
 
     for(let i = 0; i < quadCurrArray.length; i++){
-      quadCurrArray[i].setAttribute("visible", true);
-      // if(quadCurrArray[i].hasAttribute("media-video")){
-      // //  quadCurrArray[i].setAttribute("media-video", {src: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Big_Buck_Bunny_Trailer_400p.ogv"});
-      // }      
+      quadCurrArray[i].setAttribute("visible", true);     
     }    
 }
   
-//Activate media in current strata and deactivate those in previous strata
-function updateActiveMusic(strataCurr, strataPrev){
-  console.log("Current Strata: " + strataCurr);
-  console.log("Previous Strata: " + strataPrev);
-  
-  if(strataPrev != null){
-    strataMusicEntities[strataPrev].components.sound.stopSound();
-  }
-  if(strataCurr != null){
-    strataMusicEntities[strataCurr].components.sound.playSound();
-  }
-}
 
 
 
