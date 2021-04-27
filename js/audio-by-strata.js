@@ -7,14 +7,14 @@
  *
  * Usage
  * ======= 
- * 
+ * Audio sounds are uploaded to an ngrok server, which is referenced by its unique server ID.
  * 
  * Example
  * ========
- * 
+ * If ngrok Public URL is "https://ec85dd0b0721.ngrok.io/rooms", then assign variable ngrok_code to "ec85dd0b0721" 
  */
 
-let ngrok_code = "1cf14edb86db";
+let ngrok_code = "39d5ac489412";
 
 //Query user elements
 const cameraEl = document.querySelector("#avatar-rig"); //query the user
@@ -57,32 +57,32 @@ const cubeQuad6 = document.createElement('a-box');
 cubeQuad1.setAttribute('position', { x: 0, y: -2, z: 0 });
 cubeQuad1.setAttribute('material', { color: 'yellow', shader: 'flat' });
 cubeQuad1.setAttribute('visible', false);
-cubeQuad1.setAttribute('sound', {src: audio_link_1, volume: 1, loop: true, autoplay: false});
+cubeQuad1.setAttribute('sound', {src: audio_link_1, volume: 1, loop: true, autoplay: false, crossorigin: "anonymous"});
 
 cubeQuad2.setAttribute('position', { x: 0, y: 1, z: 0 });
 cubeQuad2.setAttribute('material', { color: 'blue', shader: 'flat' });
 cubeQuad2.setAttribute('visible', false);
-cubeQuad2.setAttribute('sound', {src: audio_link_2, volume: 1, loop: true, autoplay: false});
+cubeQuad2.setAttribute('sound', {src: audio_link_2, volume: 1, loop: true, autoplay: false, crossorigin: "anonymous"});
 
 cubeQuad3.setAttribute('position', { x: 0, y: 4, z: 0 });
 cubeQuad3.setAttribute('material', { color: 'green', shader: 'flat' });
 cubeQuad3.setAttribute('visible', false);
-cubeQuad3.setAttribute('sound', {src: audio_link_3, volume: 1, loop: true, autoplay: false});
+cubeQuad3.setAttribute('sound', {src: audio_link_3, volume: 1, loop: true, autoplay: false, crossorigin: "anonymous"});
 
 cubeQuad4.setAttribute('position', { x: 0, y: 7, z: 0 });
 cubeQuad4.setAttribute('material', { color: 'red', shader: 'flat' });
 cubeQuad4.setAttribute('visible', false);
-cubeQuad4.setAttribute('sound', {src: audio_link_4, volume: 1, loop: true, autoplay: false});
+cubeQuad4.setAttribute('sound', {src: audio_link_4, volume: 1, loop: true, autoplay: false, crossorigin: "anonymous"});
 
 cubeQuad5.setAttribute('position', { x: 0, y: 12, z: 0 });
 cubeQuad5.setAttribute('material', { color: 'purple', shader: 'flat' });
 cubeQuad5.setAttribute('visible', false);
-cubeQuad5.setAttribute('sound', {src: audio_link_5, volume: 1, loop: true, autoplay: false});
+cubeQuad5.setAttribute('sound', {src: audio_link_5, volume: 1, loop: true, autoplay: false, crossorigin: "anonymous"});
 
 cubeQuad6.setAttribute('position', { x: 0, y: 25, z: 0 });
 cubeQuad6.setAttribute('material', { color: 'orange', shader: 'flat' });
 cubeQuad6.setAttribute('visible', false);
-cubeQuad6.setAttribute('sound', {src: audio_link_6, volume: 1, loop: true, autoplay: false});
+cubeQuad6.setAttribute('sound', {src: audio_link_6, volume: 1, loop: true, autoplay: false, crossorigin: "anonymous"});
 
 //Code for testing on Mozilla Hubs
 APP.scene.appendChild(cubeQuad1);

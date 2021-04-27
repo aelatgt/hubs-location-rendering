@@ -118,7 +118,9 @@ let userCurrStrata = 0;
 let userPrevStrata = 0;
 
 determineUserQuad();
-assignQuadsToEntities(allEntityArray);
+
+// assignQuadsToEntity(allEntityArray);
+allEntityArray.forEach(assignQuadsToEntity);
 
 //Continously update scene info
 setInterval(function() {
@@ -130,7 +132,10 @@ setInterval(function() {
   if (interactablesAfter != interactablesBefore){
     interactablesBefore = interactablesAfter;
     allEntityArray = document.querySelectorAll("[gltf-model-plus][networked], [media-video][networked], [media-image][networked], [media-pdf][networked]");
-    assignQuadsToEntities(allEntityArray);
+
+    // assignQuadsToEntity(allEntityArray);
+    allEntityArray.forEach(assignQuadsToEntity);
+    updateVisible(userCurrQuad, userPrevQuad);
   }
   
   //Check if user left the quadrant
@@ -146,34 +151,37 @@ setInterval(function() {
   }
 }, 1000/80);
 
-function assignQuadsToEntities(entityArr){
+function assignQuadsToEntity(currEntity){
 
   //Calculate and assign corresponding "quad" class to each entity 
-  for(let i = 0; i < entityArr.length; i++){
-    let currEntity = entityArr[i];
+  
     let entityPos = currEntity.getAttribute('position');
     let entityAngle = calcAngle(ORIGIN_X, ORIGIN_Z, entityPos.x, entityPos.z);  
     let entityQuad = calcQuad(entityAngle);
 
     if( entityQuad === 1 ){
-      currEntity.classList.add("quad1");
+      currEntity.classList.remove("quad1", "quad2", "quad3", "quad4");
+      currEntity.classList.add("quad1");      
       if(userCurrQuad != 1){
         currEntity.setAttribute("visible", false)
       }
     }
     else if( entityQuad === 2){
+      currEntity.classList.remove("quad1", "quad2", "quad3", "quad4")
       currEntity.classList.add("quad2");
       if(userCurrQuad != 2){
         currEntity.setAttribute("visible", false)
       }
     }
     else if( entityQuad === 3){
+      currEntity.classList.remove("quad1", "quad2", "quad3", "quad4")
       currEntity.classList.add("quad3");
       if(userCurrQuad != 3){
         currEntity.setAttribute("visible", false)
       }
     }
     else if( entityQuad === 4){
+      currEntity.classList.remove("quad1", "quad2", "quad3", "quad4")
       currEntity.classList.add("quad4");
       if(userCurrQuad != 4){
         currEntity.setAttribute("visible", false)
@@ -183,7 +191,16 @@ function assignQuadsToEntities(entityArr){
       console.log("Could not determine quadrant");
     }
 
-  }
+    //Reassign quadrant class if the object moved location
+    currEntity.addEventListener('componentchanged', function (evt) {
+      // console.log('Event name: ' + evt.detail.name);
+      if (evt.detail.name === 'body-helper') {
+        // console.log('Entity has moved from', evt.detail.oldData, 'to', evt.detail.newData, '!');
+        assignQuadsToEntity(this);
+      }
+    });
+    
+    updateVisible(userCurrQuad, userPrevQuad); 
 }
 
 function determineUserQuad(){
